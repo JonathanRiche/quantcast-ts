@@ -1,0 +1,52 @@
+{
+  "name": "quantcast-graphql-api",
+  "version": "1.0.0",
+  "description": "TypeScript library and CLI for the Quantcast GraphQL API",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "quantcast-cli": "dist/cli/simple-cli.js",
+    "qc": "dist/cli/simple-cli.js"
+  },
+  "scripts": {
+    "build": "bun build src/index.ts --outdir dist",
+    "build:lib": "bun build src/index.ts --outdir dist",
+    "build:cli": "bun build --compile --minify --sourcemap src/cli/index.ts --outfile quantcast-cli",
+    "build:cli:linux": "bun build --compile --minify --sourcemap --target=bun-linux-x64 src/cli/index.ts --outfile release/quantcast-cli-linux-x64",
+    "build:cli:windows": "bun build --compile --minify --sourcemap --target=bun-windows-x64 src/cli/index.ts --outfile release/quantcast-cli-windows-x64.exe",
+    "build:cli:macos": "bun build --compile --minify --sourcemap --target=bun-darwin-arm64 src/cli/index.ts --outfile release/quantcast-cli-macos-arm64",
+    "build:cli:all": "mkdir -p release && bun run build:cli:linux && bun run build:cli:windows && bun run build:cli:macos",
+    "build:all": "bun run build && bun run build:cli",
+    "dev": "bun build src/index.ts --outdir dist --watch",
+    "test": "bun test",
+    "test:watch": "bun test --watch",
+    "prepublishOnly": "bun run build",
+    "cli": "bun src/cli/index.ts"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "quantcast",
+    "graphql",
+    "api",
+    "typescript",
+    "advertising",
+    "reporting",
+    "cli"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {},
+  "peerDependencies": {
+    "typescript": ">=4.5.0"
+  }
+}
