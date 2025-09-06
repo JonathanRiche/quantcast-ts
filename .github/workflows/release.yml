@@ -11,6 +11,11 @@ on:
         required: true
         type: string
 
+# Add explicit permissions for the GITHUB_TOKEN
+permissions:
+  contents: write
+  pull-requests: read
+
 jobs:
   build:
     name: Build CLI Executables
@@ -144,7 +149,7 @@ jobs:
           EOF
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
+        uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ steps.version.outputs.VERSION }}
           name: "Quantcast CLI ${{ steps.version.outputs.VERSION }}"
@@ -157,6 +162,8 @@ jobs:
             release/checksums.txt
           draft: false
           prerelease: false
+          fail_on_unmatched_files: true
+          generate_release_notes: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 

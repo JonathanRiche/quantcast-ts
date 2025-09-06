@@ -95,3 +95,44 @@ Each release includes:
 - ✅ Quick start instructions
 
 The workflow ensures all executables are properly built, tested, and verified before release.
+
+## 🔧 Troubleshooting
+
+### Permission Errors (403 Forbidden)
+
+If you see a 403 error when creating releases, check your repository settings:
+
+1. **Go to Settings → Actions → General**
+2. **Under "Workflow permissions"**:
+   - Select "Read and write permissions"
+   - Check "Allow GitHub Actions to create and approve pull requests"
+3. **Save the settings**
+
+### Alternative: Use Personal Access Token
+
+If the default `GITHUB_TOKEN` doesn't work:
+
+1. **Create a Personal Access Token**:
+   - Go to GitHub Settings → Developer settings → Personal access tokens → Tokens (classic)
+   - Click "Generate new token (classic)"
+   - Select scopes: `repo`, `write:packages`
+   - Copy the token
+
+2. **Add it as a repository secret**:
+   - Go to your repo → Settings → Secrets and variables → Actions  
+   - Click "New repository secret"
+   - Name: `RELEASE_TOKEN`
+   - Value: Your token
+
+3. **Update the workflow** to use your token:
+   ```yaml
+   env:
+     GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
+   ```
+
+### Manual Release Creation
+
+If the workflow fails, you can create releases manually:
+1. Build locally: `bun run build:cli:all`
+2. Go to GitHub → Releases → Create a new release
+3. Upload the files from the `release/` directory
