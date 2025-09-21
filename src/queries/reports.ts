@@ -1,11 +1,13 @@
 // Query definitions for reporting operations
 
+//$timezone: String,
+//
+//timezone: $timezone,
 export const ACCOUNT_METRICS_REPORT_QUERY = `
   query AccountMetricsReport(
     $accountId: Long!,
     $startDate: Date!,
     $endDate: Date!,
-    $timezone: String,
     $filters: [AccountMetricsReportRequest_FilterInput!],
     $breakdowns: [String!],
     $metrics: [String!]!
@@ -14,7 +16,6 @@ export const ACCOUNT_METRICS_REPORT_QUERY = `
       accountId: $accountId,
       startDate: $startDate,
       endDate: $endDate,
-      timezone: $timezone,
       filters: $filters,
       breakdowns: $breakdowns,
       metrics: $metrics

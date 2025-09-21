@@ -111,6 +111,15 @@ bun src/cli/index.ts async-report 123456 \
   --breakdowns "Campaign Name,Month"
 ```
 
+### Generate async report with all available metrics
+```bash
+bun src/cli/index.ts async-report 123456 \
+  --start-date 2024-01-01 \
+  --end-date 2024-03-31 \
+  --metrics "ALL" \
+  --breakdowns "Campaign Name"
+```
+
 ## Output Formats
 
 - `--format json` (default): Pretty-printed JSON

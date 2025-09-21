@@ -55,7 +55,6 @@ export interface AbsoluteDateRange {
 export interface MetricsReportRequestInput {
   entity: Entity;
   dateRange: AbsoluteDateRange;
-  timezone?: string;
   filters?: Array<{
     breakdown: string;
     values: string[];

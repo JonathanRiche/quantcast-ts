@@ -34,8 +34,18 @@ export async function generateReport(accountId: string, options: ReportOptions =
     const startDate = options.startDate || '2024-01-01';
     const endDate = options.endDate || '2024-01-31';
     const timezone = options.timezone || 'UTC';
-    const metrics = options.metrics || ['Impressions'];
+    let metrics = options.metrics || ['Impressions'];
     const breakdowns = options.breakdowns || ['Campaign Name'];
+
+    // Handle "ALL" metrics option
+    if (metrics.length === 1 && metrics[0]!.toUpperCase() === 'ALL') {
+      console.log(`Fetching all available metrics for account ${accountId}...`);
+      const available = await client.getAvailableBreakdownsAndMetrics({
+        accountId: Number(accountId)
+      });
+      metrics = available.metrics.map(m => m.name);
+      console.log(`Found ${metrics.length} available metrics`);
+    }
 
     // Validate dates
     if (!validateDateFormat(startDate)) {
@@ -99,9 +109,18 @@ export async function generateAsyncReport(accountId: string, options: ReportOpti
 
     const startDate = options.startDate || '2024-01-01';
     const endDate = options.endDate || '2024-03-31';
-    const timezone = options.timezone || 'UTC';
-    const metrics = options.metrics || ['Impressions'];
+    let metrics = options.metrics || ['Impressions'];
     const breakdowns = options.breakdowns || ['Campaign Name'];
+
+    // Handle "ALL" metrics option
+    if (metrics.length === 1 && metrics[0]!.toUpperCase() === 'ALL') {
+      console.log(`Fetching all available metrics for account ${accountId}...`);
+      const available = await client.getAvailableBreakdownsAndMetrics({
+        accountId: Number(accountId)
+      });
+      metrics = available.metrics.map(m => m.name);
+      console.log(`Found ${metrics.length} available metrics`);
+    }
 
     console.log(`Requesting async report for account ${accountId}...`);
     
@@ -111,7 +130,6 @@ export async function generateAsyncReport(accountId: string, options: ReportOpti
         dateRange: {
           absoluteDateRange: { startDate, endDate }
         },
-        timezone,
         metrics,
         breakdowns,
         filters: options.filters

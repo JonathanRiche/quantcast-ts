@@ -25,7 +25,7 @@ Report Options:
   --start-date <date>               Start date (YYYY-MM-DD, default: 2024-01-01)
   --end-date <date>                 End date (YYYY-MM-DD, default: 2024-01-31)
   --timezone <tz>                   Timezone (default: UTC)
-  --metrics <metrics>               Comma-separated metrics (default: Impressions)
+  --metrics <metrics>               Comma-separated metrics or "ALL" for all available (default: Impressions)
   --breakdowns <breakdowns>         Comma-separated breakdowns (default: Campaign Name)
   --format <format>                 Output format: json|table (default: json)
 
@@ -45,6 +45,7 @@ Examples:
   quantcast-cli metrics 123456
   quantcast-cli report 123456 --start-date 2024-01-01 --end-date 2024-01-31
   quantcast-cli async-report 123456 --metrics "Impressions,Budget Delivered" --breakdowns "Campaign Name,Month"
+  quantcast-cli async-report 123456 --metrics "ALL" --breakdowns "Campaign Name"
 `);
 }
 
