@@ -16,7 +16,9 @@ A comprehensive TypeScript library and CLI tool for interacting with the Quantca
 ## Installation
 
 ```bash
-bun add quantcast-graphql-api
+npm install quantcast-ts
+# or
+bun add quantcast-ts
 ```
 
 ## CLI Installation
@@ -37,7 +39,7 @@ bun quantcast-cli accounts
 ## Quick Start
 
 ```typescript
-import { QuantcastClient } from 'quantcast-graphql-api';
+import { QuantcastClient } from 'quantcast-ts';
 
 // Initialize the client with your API credentials
 const client = new QuantcastClient({
@@ -286,7 +288,7 @@ import {
   RateLimitError, 
   GraphQLError,
   NetworkError 
-} from 'quantcast-graphql-api';
+} from 'quantcast-ts';
 
 try {
   const accounts = await client.getAccounts();
@@ -311,7 +313,7 @@ try {
 For advanced use cases, you can use the low-level GraphQL client directly:
 
 ```typescript
-import { GraphQLClient, QuantcastOAuth } from 'quantcast-graphql-api';
+import { GraphQLClient, QuantcastOAuth } from 'quantcast-ts';
 
 const auth = new QuantcastOAuth(credentials);
 const graphql = new GraphQLClient(auth);

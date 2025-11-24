@@ -1,0 +1,35 @@
+# Source files
+src/
+tests/
+examples/
+
+# Config files
+tsconfig.json
+tsconfig.lib.json
+.env
+.env.*
+!.env.example
+
+# Build artifacts
+*.tsbuildinfo
+coverage/
+.cache
+
+# Git
+.git/
+.github/
+
+# IDE
+.idea/
+.vscode/
+
+# OS
+.DS_Store
+
+# Other
+release/
+scripts/
+PROJECT_SUMMARY.md
+CLI_USAGE.md
+RELEASE.md
+bun.lock
